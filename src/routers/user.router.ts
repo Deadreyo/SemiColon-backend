@@ -15,6 +15,7 @@ import {
 } from "../middlewares/userDataValidator";
 import giveAccessTo from "../middlewares/authentication/giveAccessTo.middleware";
 import isLoggedIn from "../middlewares/authentication/login.middleware";
+import { limiter } from "../middlewares/rate-limiter";
 
 const userRouter = Router();
 
@@ -25,13 +26,14 @@ userRouter.get(
   mwValidatePhone,
   getUserByPhone
 );
-userRouter.get(
-  "/getAll",
+userRouter.get("/getAll", isLoggedIn, giveAccessTo("admin"), getAllUsers);
+userRouter.post(
+  "/",
   isLoggedIn,
   giveAccessTo("admin"),
-  getAllUsers
+  mwValidateUserData,
+  addNewUser
 );
-userRouter.post("/", isLoggedIn, giveAccessTo("admin"), mwValidateUserData, addNewUser);
 userRouter.patch(
   "/update/:id",
   isLoggedIn,
@@ -53,5 +55,11 @@ userRouter.patch(
   mwValidateId,
   deactivateUser
 );
-userRouter.delete("/:id", isLoggedIn, giveAccessTo("admin"), mwValidateId, deleteUser);
+userRouter.delete(
+  "/:id",
+  isLoggedIn,
+  giveAccessTo("admin"),
+  mwValidateId,
+  deleteUser
+);
 export default userRouter;

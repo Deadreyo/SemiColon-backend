@@ -7,10 +7,17 @@ import {
 } from "../controllers/log.controller";
 import isLoggedIn from "../middlewares/authentication/login.middleware";
 import giveAccessTo from "../middlewares/authentication/giveAccessTo.middleware";
+import { signInLimiter } from "../middlewares/rate-limiter";
 
 const logRouter = Router();
 
-logRouter.get("/", isLoggedIn, giveAccessTo("admin"), getAllLogs);
+logRouter.get(
+  "/",
+  signInLimiter,
+  isLoggedIn,
+  giveAccessTo("admin"),
+  getAllLogs
+);
 logRouter.get(
   "/admin/:phone",
   isLoggedIn,

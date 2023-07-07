@@ -24,6 +24,15 @@ export async function getAllParticipants(req: Request, res: Response) {
 	 * #swagger.tags = ['Participants']
 	 * #swagger.description = 'Endpoint to get all participants from database'
 	 */
+
+	/* #swagger.security = [{
+            "bearerAuth": []
+    }] */
+
+	/* #swagger.responses[200] = {
+			schema: {"$ref": "#/definitions/AllPars"},
+			description: "All Participants data"
+  }*/
 	try {
 		const participants = await dbGetAllParticipants();
 		res.status(200).json({ status: "success", data: participants });
@@ -40,6 +49,10 @@ export async function addParticipant(req: Request, res: Response) {
 	 * #swagger.tags = ['Participants']
 	 * #swagger.description = 'Endpoint to get add a participant to database'
 	 */
+
+	/* #swagger.security = [{
+            "bearerAuth": []
+    }] */
 	try {
 		const { participant }: { participant: ParticipantType } = req.body;
 		const newParticipant = await dbUpsertParticipant(participant);
@@ -53,6 +66,9 @@ export async function addParticipant(req: Request, res: Response) {
 }
 
 export async function deleteParticipantByEmail(req: Request, res: Response) {
+	/* #swagger.security = [{
+            "bearerAuth": []
+    }] */
 	const session = await mongoose.startSession();
 	session.startTransaction();
 	try {
@@ -84,6 +100,10 @@ export async function deleteParticipantByPhone(req: Request, res: Response) {
 	 * #swagger.tags = ['Participants']
 	 * #swagger.description = 'Endpoint to get delete a participant from database'
 	 */
+
+	/* #swagger.security = [{
+            "bearerAuth": []
+    }] */
 	const session = await mongoose.startSession();
 	session.startTransaction();
 	try {
@@ -115,6 +135,10 @@ export async function updateParticipantByPhone(req: Request, res: Response) {
 	 * #swagger.tags = ['Participants']
 	 * #swagger.description = 'Endpoint to update a participant in database'
 	 */
+
+	/* #swagger.security = [{
+            "bearerAuth": []
+    }] */
 	const session = await mongoose.startSession();
 	session.startTransaction();
 	try {
@@ -147,6 +171,14 @@ export async function updateParticipantByPhone(req: Request, res: Response) {
 //------------------Emails------------------//
 
 export async function bulkEmailParticipants(req: Request, res: Response) {
+	/**
+	 * #swagger.tags = ['Participants']
+	 * #swagger.description = 'Endpoint to email a participant in database'
+	 */
+
+	/* #swagger.security = [{
+            "bearerAuth": []
+    }] */
 	const { type, preferences } = req.body;
 	try {
 		let EmailType = type as EmailTypeEnum;
@@ -180,6 +212,10 @@ export async function acceptParticipantByPhone(req: Request, res: Response) {
 	 * #swagger.tags = ['Participants']
 	 * #swagger.description = 'Endpoint to get accept a participant from database'
 	 */
+
+	/* #swagger.security = [{
+            "bearerAuth": []
+    }] */
 	const session = await mongoose.startSession();
 	session.startTransaction();
 	try {
@@ -221,6 +257,10 @@ export async function rejectParticipantByPhone(req: Request, res: Response) {
 	 * #swagger.tags = ['Participants']
 	 * #swagger.description = 'Endpoint to get reject a participant from database'
 	 */
+
+	/* #swagger.security = [{
+            "bearerAuth": []
+    }] */
 	const session = await mongoose.startSession();
 	session.startTransaction();
 	try {
@@ -262,6 +302,10 @@ export async function emailParticipantByPhone(req: Request, res: Response) {
 	 * #swagger.tags = ['Participants']
 	 * #swagger.description = 'Endpoint to get send an email to a participant from database'
 	 */
+
+	/* #swagger.security = [{
+            "bearerAuth": []
+    }] */
 	const session = await mongoose.startSession();
 	session.startTransaction();
 	try {
@@ -306,6 +350,10 @@ export async function updateParticipantStatus(req: Request, res: Response) {
 	 * #swagger.tags = ['Participants']
 	 * #swagger.description = 'Endpoint to update a participant's status'
 	 */
+
+	/* #swagger.security = [{
+            "bearerAuth": []
+    }] */
 	const session = await mongoose.startSession();
 	session.startTransaction();
 	try {
@@ -343,6 +391,10 @@ export async function addNoteToParticipant(req: Request, res: Response) {
 	 * #swagger.tags = ['Participants']
 	 * #swagger.description = 'Endpoint to add a note to a participant in database'
 	 */
+
+	/* #swagger.security = [{
+            "bearerAuth": []
+    }] */
 	const session = await mongoose.startSession();
 	session.startTransaction();
 	try {

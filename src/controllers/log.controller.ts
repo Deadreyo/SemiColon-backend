@@ -12,6 +12,10 @@ export async function getAllLogs(req: Request, res: Response) {
 	 * #swagger.tags = ['Log']
 	 * #swagger.description = 'Endpoint to get all logs by all admins'
 	 */
+
+	/* #swagger.security = [{
+            "bearerAuth": []
+    }] */
 	try {
 		const userLogs = await dbGetAllUserLogs();
 		const participantLogs = await dbGetAllParticipantLogs();
@@ -28,6 +32,9 @@ export async function getAllLogs(req: Request, res: Response) {
 }
 
 export async function getLogsByAdminId(req: Request, res: Response) {
+	/* #swagger.security = [{
+            "bearerAuth": []
+    }] */
 	try {
 		const adminId = req.params.id;
 		const logs = await dbGetLogsByAdminId(adminId);
@@ -48,6 +55,10 @@ export async function getLogsByParticipantId(req: Request, res: Response) {
 	 * #swagger.tags = ['Log']
 	 * #swagger.description = 'Endpoint to get all logs applied on a participant'
 	 */
+
+	/* #swagger.security = [{
+            "bearerAuth": []
+    }] */
 	try {
 		const participantId = req.params.id;
 		const logs = await dbGetLogsByParticipantId(participantId);
@@ -68,6 +79,10 @@ export async function getLogsByAdminPhone(req: Request, res: Response) {
 	 * #swagger.tags = ['Log']
 	 * #swagger.description = 'Endpoint to get all logs by an admin using their phone'
 	 */
+
+	/* #swagger.security = [{
+            "bearerAuth": []
+    }] */
 	try {
 		const adminPhone = req.params.phone;
 		const logs = await dbGetLogsByAdminId(adminPhone);
