@@ -8,8 +8,16 @@ authRouter.post(
 	(req, res, next) => {
 		/**
 		 * #swagger.tags = ['Auth']
-		 * #swagger.description = 'Endpoint to authenticate All logins login'
+		 * #swagger.description = 'Endpoint to authenticate All logins'
 		 */
+
+		/* #swagger.requestBody = {
+			content: {
+				"application/json": {
+					schema: {$ref: "#/definitions/LoginData"}
+				}
+			}
+		}*/
 		next();
 	},
 	mwValidateLoginData,
@@ -21,7 +29,7 @@ authRouter.post(
 	(req, res, next) => {
 		/**
 		 * #swagger.tags = ['Auth']
-		 * #swagger.description = 'Endpoint to authenticate All logins login'
+		 * #swagger.description = 'Endpoint to authenticate All registers'
 		 */
 		next();
 	},
